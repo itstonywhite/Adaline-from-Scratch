@@ -7,7 +7,7 @@ class AdalineGD:
     ADAptive LInear NEuron classifier.
     
     Parameters:
-        eta = float
+        eta : float
             Learning rate (between 0.0 and 1.0)
         n_iter : int
             Passes over the training dataset.
@@ -17,7 +17,7 @@ class AdalineGD:
     Attributes:
         w_ : 1d-array
             Weights after fitting.
-        b_ : Scaler
+        b_ : Scalar
             Bias unit after fitting.
         losses_ : list
             Mean squared error loss function values in each epoch.
@@ -103,4 +103,4 @@ ax[1].set_ylabel('Mean squared error')
 ax[1].set_title('Adaline - Learning rate 0.0001')
 plt.show()
 
-
+# Tony White ✍️
