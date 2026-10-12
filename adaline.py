@@ -1,7 +1,9 @@
+# Importing dependencies & packages
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Full Batch Gradient Descent Adaline API
 class AdalineGD:
     """
     ADAptive LInear NEuron classifier.
