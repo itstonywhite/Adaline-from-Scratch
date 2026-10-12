@@ -86,9 +86,21 @@ X = df.iloc[0:100, [0, 2]].values
 
 # Training GD Adaline algorithm on the Iris data subset
 ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
+ada2 = AdalineGD(n_iter=15, eta=0.0001).fit(X, y)
 
 # Loss vs. the number of epochs plot
-# fig, ax = plt.subplot(nrows=1, ncols=2, figsize=(10, 4))
-# ax[0].plot()
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+ax[0].plot(range(1, len(ada1.losses_) + 1),
+           np.log10(ada1.losses_), marker='o')
+ax[0].set_xlabel('Epochs')
+ax[0].set_ylabel('log(Mean squared error)')
+ax[0].set_title('Adaline - Learning rate 0.1')
+
+ax[1].plot(range(1, len(ada2.losses_) + 1),
+           ada2.losses_, marker='o')
+ax[1].set_xlabel('Epochs')
+ax[1].set_ylabel('Mean squared error')
+ax[1].set_title('Adaline - Learning rate 0.0001')
+plt.show()
 
 
