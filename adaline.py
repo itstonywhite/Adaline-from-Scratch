@@ -59,6 +59,9 @@ class AdalineGD:
             self.losses_.append(loss)
         return self
     
+    def net_input(self, X):
+        """Calculate net input"""
+        return np.dot(X, self.w_) + self.b_
     
         
 
