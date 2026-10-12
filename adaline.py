@@ -85,7 +85,7 @@ y = np.where(y == 'Iris-setosa', 0, 1)
 X = df.iloc[0:100, [0, 2]].values
 
 # Training GD Adaline algorithm on the Iris data subset
-# ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
+ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
 
 # Loss vs. the number of epochs plot
 # fig, ax = plt.subplot(nrows=1, ncols=2, figsize=(10, 4))
