@@ -25,4 +25,21 @@ class AdalineGD:
         self.eta = eta
         self.n_iter = n_iter
         self.random_state = random_state
+        
+    def fit(self, X, y):
+        """
+        Fit training data.
+        
+        Parameters:
+            X : {array-like}, shape = [n_examples, n_features]
+                Training vectors, where n_examples is the
+                number of examples and n_features is the
+                number of features.
+            y : array-like, shape = [n_examples]
+                Target values.
+                
+        Returns
+            self : object
+        """
+        
 
