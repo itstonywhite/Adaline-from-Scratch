@@ -72,7 +72,10 @@ class AdalineGD:
         """Return class label after unit step"""
         return np.where(self.activation(self.net_input(X))
                         >= 0.5, 1, 0)
-    
 
-        
+# Loss vs. the number of epochs plot
+# fig, ax = plt.subplot(nrows=1, ncols=2, figsize=(10, 4))
+# ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
+# ax[0].plot()
+
 
