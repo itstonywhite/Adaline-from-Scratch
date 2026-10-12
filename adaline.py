@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 class AdalineGD:
@@ -73,9 +74,21 @@ class AdalineGD:
         return np.where(self.activation(self.net_input(X))
                         >= 0.5, 1, 0)
 
+# Loading the dataset
+df = pd.read_csv('./iris.txt', header=None, encoding='utf-8')
+
+# Select setosa and versicolor
+y = df.iloc[0:100, 4].values
+y = np.where(y == 'Iris-setosa', 0, 1)
+
+# Extract the sepal length and petal length
+X = df.iloc[0:100, [0, 2]].values
+
+# Training GD Adaline algorithm on the Iris data subset
+# ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
+
 # Loss vs. the number of epochs plot
 # fig, ax = plt.subplot(nrows=1, ncols=2, figsize=(10, 4))
-# ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
 # ax[0].plot()
 
 
