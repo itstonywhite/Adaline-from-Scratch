@@ -41,5 +41,9 @@ class AdalineGD:
         Returns
             self : object
         """
+        rgn = np.random.default_rng(self.random_state)
+        self.w_ = rgn.normal(loc=0.0, scale=0.01, size=X.shape[1])
+        self.b_ = np.float64(0.)
+        self.losses_ = []
         
 
