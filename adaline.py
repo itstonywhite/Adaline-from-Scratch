@@ -46,6 +46,23 @@ class AdalineGD:
         Returns
             self : object
         """
+        # Input validation
+        if X.ndim != 2:
+            raise ValueError("X must be a 2-dimensional array.")
+
+        if y.ndim != 1:
+            raise ValueError("y must be a 1-dimensional array.")
+
+        if X.shape[0] != y.shape[0]:
+            raise ValueError("X and y must contain the same number of samples.")
+
+        if X.shape[0] == 0:
+            raise ValueError("X cannot be empty.")
+
+        if not np.isfinite(X).all() or not np.isfinite(y).all():
+            raise ValueError("X and y must contain only finite values.")
+
+        # Converting inputs into NumPy arrays
         X = np.asarray(X, dtype=float)
         y = np.asarray(y, dtype=float)
 
