@@ -175,8 +175,14 @@ def main():
     plt.tight_layout()
     plt.show()
     
-    # 
-    
+    # MSE by number of epochs plot
+    plt.plot(range(1, len(ada_gd.losses_) + 1),
+             ada_gd.losses_, marker='o')
+    plt.xlabel('Epochs')
+    plt.ylabel('Mean Squared Error')
+    plt.tight_layout()
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
