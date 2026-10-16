@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 # Full Batch Gradient Descent Adaline API
 class AdalineGD:
@@ -75,6 +76,54 @@ class AdalineGD:
         """Return class label after unit step"""
         return np.where(self.activation(self.net_input(X))
                         >= 0.5, 1, 0)
+
+# visualizing the decision boundaries for two-dimensional datasets
+def plot_decision_regions(X, y, classifier, resolution=0.02):
+    """
+    Plot the decision regions of a classifier for 2D data.
+
+    Parameters:
+        1. X : array-like, shape = [n_examples, 2]
+            Feature matrix. Must have exactly two columns, since
+            the plot is two-dimensional.
+        2. y : array-like, shape = [n_examples]
+            Class labels. At most 5 distinct classes.
+        3. classifier : object
+            Fitted model with a predict(X) method that accepts an
+            array of shape [n_points, 2] and returns class labels.
+        4. resolution : float, optional (default=0.02)
+            Grid step size in feature units. Smaller values give a
+            smoother boundary but need more predict calls.
+
+    Returns:
+        None
+    """
+    
+    # Setup marker generator and color map
+    markers = ('o', 's', '^', 'v', '<')
+    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
+    cmap = ListedColormap(colors[:len(np.unique(y))])
+    
+    # Plotting the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
+                           np.arange(x2_min, x2_max, resolution))
+    lab = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    lab = lab.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, lab, alpha=0.3, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+    
+    # Plot class labels
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(x=X[y == cl, 0],
+                    y=X[y == cl, 1],
+                    alpha=0.8,
+                    c=colors[idx],
+                    marker=markers[idx],
+                    label=f'Class {cl}',
+                    edgecolors='black')
 
 # Loading the dataset
 df = pd.read_csv('./iris.txt', header=None, encoding='utf-8')
