@@ -3,27 +3,130 @@
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-Scientific%20Computing-013243.svg)](https://numpy.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458.svg)](https://pandas.pydata.org/)
-[![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-11557c.svg)](https://matplotlib.org/)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-Data%20Visualization-11557c.svg)](https://matplotlib.org/)
 
-An implementation of the **Adaline Algorithm** using Python and NumPy, designed to demonstrate the core mechanics of a binary linear classifier without relying on a pre-built machine learning implementation.
+An implementation of the **ADAptive LInear NEuron (Adaline)** algorithm using Python and NumPy, built from scratch to explore the fundamentals of machine learning and gradient-based optimization.
 
-The model is implemented using an **Object-Oriented Programming (OOP)** approach and trained on a binary subset of the **Iris dataset**.
+The project uses an object-oriented design and the Iris dataset to demonstrate how a linear classifier learns from data, how the learning rate affects convergence, and how feature standardization influences gradient descent.
 
-## 📈📉 Plots
+## 📚 About Adaline
 
-![Plot](./Plots/loss%20vs%20epochs%20plot.png)
+Adaline is a linear classifier that learns by minimizing a cost function using gradient descent.
+
+Unlike the Perceptron, which updates its weights based on classification errors, Adaline uses the continuous output of its linear activation function to calculate the error during training.
+
+### Cost Function
+
+The model minimizes the Mean Squared Error (MSE):
+
+\[
+J(\mathbf{w},b)=\frac{1}{n}\sum\_{i=1}^{n}\left(y^{(i)}-\hat{y}^{(i)}\right)^2
+\]
+
+where:
+
+- \(n\) is the number of training examples.
+- \(y^{(i)}\) is the target value.
+- \(\hat{y}^{(i)}\) is the continuous linear output.
+- \(\mathbf{w}\) and \(b\) represent the weights and bias.
+
+The weights and bias are updated using full batch gradient descent.
+
+### 📥 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/itstonywhite/Adaline-from-Scratch.git
+cd Adaline-from-Scratch
+```
+
+2. Install the required dependencies:
+
+```bash
+pip install numpy pandas matplotlib
+```
+
+### Run the Example
+
+Run the Iris experiment directly from the project root:
+
+```bash
+python examples/adaline_gd_iris.py
+```
+
+or
+
+```bash
+python examples/adaline_sgd_iris.py
+```
+
+The example trains Adaline models using different learning rates, displays their loss curves, and visualizes the learned decision regions.
+
+## 📊 Results and Visualizations
+
+### 1. Learning Rate Comparison
+
+Compare the training loss using different learning rates on the original, non-standardized Iris features.
+
+![Adaline learning rate comparison](./plots/loss%20vs%20epochs%20plot.png)
+
+### 2. Decision Regions
+
+Visualize the decision boundary learned by Adaline using standardized sepal length and petal length features.
+
+![Adaline decision regions](./plots/Adaline%27s%20Decision%20Regions.png)
+
+### 3. Mean Squared Error by Epoch
+
+Observe how the model's Mean Squared Error changes as full batch gradient descent progresses on the standardized dataset.
+
+![Adaline MSE by epoch](./plots/MSE%20by%20number%20of%20epochs%20plot.png)
+
+## 🛠️ Implementation Details
+
+The `AdalineGD` class provides the following methods:
+
+| Method          | Description                                            |
+| --------------- | ------------------------------------------------------ |
+| `fit(X, y)`     | Trains the model using full batch gradient descent.    |
+| `net_input(X)`  | Calculates the weighted sum plus bias.                 |
+| `activation(X)` | Returns the linear activation.                         |
+| `predict(X)`    | Predicts binary class labels using a threshold of 0.5. |
+
+The implementation uses NumPy for vectorized mathematical operations and Matplotlib for visualization. Pandas is used to load and process the Iris dataset.
 
 ## 📂 Repository Structure
 
 ```text
 .
-├── iris.txt                           # Iris Dataset
-├── adaline.py                         # All the Codes
-├── Plots                              # Plots Directory
-│   └── loss vs epochs plot.png        # Plot
-└── README.md                          # Documentation
+├── adaline/
+│   ├── __init__.py
+│   ├── adaline_gd.py       # Full Batch Gradient Descent
+│   └── adaline_sgd.py      # Stochastic Gradient Descent (in development)
+│
+├── data/
+│   └── iris.txt            # Iris dataset
+│
+├── examples/
+│   └── adaline_gd_iris.py  # Training and visualization example
+│
+├── plots/
+│   ├── Adaline's Decision Regions.png
+│   ├── loss vs epochs plot.png
+│   └── MSE by number of epochs plot.png
+│
+├── utils/
+│   └── plotting.py         # Decision-region visualization utility
+│
+├── .gitignore
+└── README.md
 ```
 
----
+## 👨‍💻 Author
 
-\- [Tony White](https://github.com/itstonywhite) ✍️
+**Tony White**
+
+GitHub: [@itstonywhite](https://github.com/itstonywhite)
+
+_Built for learning, experimentation, and a deeper understanding of machine learning from first principles._
