@@ -46,12 +46,15 @@ class AdalineGD:
         Returns
             self : object
         """
+        X = np.asarray(X, dtype=float)
+        y = np.asarray(y, dtype=float)
+
         rgn = np.random.default_rng(self.random_state)
         self.w_ = rgn.normal(loc=0.0, scale=0.01, size=X.shape[1])
         self.b_ = np.float64(0.)
         self.losses_ = []
         
-        for i in range(self.n_iter):
+        for _ in range(self.n_iter):
             net_input = self.net_input(X)
             output = self.activation(net_input)
             errors = y - output
