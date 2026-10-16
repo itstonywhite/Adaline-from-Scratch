@@ -80,9 +80,7 @@ class AdalineGD:
             self.w_ += self.eta * 2.0 * X.T.dot(errors) / X.shape[0]
             self.b_ += self.eta * 2.0 * errors.mean()
 
-            # Calculating loss after the update
-            updated_output = self.activation(self.net_input(X))
-            loss = ((y - updated_output) ** 2).mean()
+            loss = (errors ** 2).mean()
             self.losses_.append(loss)
         return self
     
@@ -151,7 +149,7 @@ def main():
     # Training a Gradient Descent Adaline model on the Iris dataset
     
     # Loading the dataset
-    df = pd.read_csv('./iris.txt', header=None, encoding='utf-8')
+    df = pd.read_csv('./data/iris.txt', header=None, encoding='utf-8')
 
     # Select setosa and versicolor
     y = df.iloc[0:100, 4].values
