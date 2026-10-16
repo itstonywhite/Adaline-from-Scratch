@@ -92,4 +92,4 @@ class AdalineGD:
         return np.where(self.activation(self.net_input(X))
                         >= 0.5, 1, 0)
 
-
+# Tony White ✍️
