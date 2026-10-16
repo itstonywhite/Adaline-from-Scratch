@@ -86,9 +86,18 @@ y = np.where(y == 'Iris-setosa', 0, 1)
 # Extract the sepal length and petal length
 X = df.iloc[0:100, [0, 2]].values
 
+# Standardization
+X_std = np.copy(X)
+X_std[:,0] = (X[:,0] - X[:,0].mean()) / X[:,0].std()
+X_std[:,1] = (X[:,1] - X[:,1].mean()) / X[:,1].std()
+
 # Training GD Adaline algorithm on the Iris data subset
 ada1 = AdalineGD(n_iter=15, eta=0.1).fit(X, y)
 ada2 = AdalineGD(n_iter=15, eta=0.0001).fit(X, y)
+
+# Training GD Adaline algorithm on standardized data
+ada_gd = AdalineGD(n_iter=20, eta=0.5)
+ada_gd.fit(X_std, y)
 
 # Loss vs. the number of epochs plot
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
