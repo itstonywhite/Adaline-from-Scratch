@@ -165,6 +165,18 @@ def main():
     ax[1].set_ylabel('Mean squared error')
     ax[1].set_title('Adaline - Learning rate 0.0001')
     plt.show()
+    
+    # Standardized Adaline's Decision Regions Plot
+    plot_decision_regions(X_std, y, classifier=ada_gd)
+    plt.title('Adaline - Gradient Descent')
+    plt.xlabel('Sepal Length [standardized]')
+    plt.ylabel('Petal Length [standardized]')
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+    
+    # 
+    
 
 if __name__ == "__main__":
     main()
