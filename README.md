@@ -19,16 +19,24 @@ Unlike the Perceptron, which updates its weights based on classification errors,
 
 The model minimizes the Mean Squared Error (MSE):
 
-\[
-J(\mathbf{w},b)=\frac{1}{n}\sum\_{i=1}^{n}\left(y^{(i)}-\hat{y}^{(i)}\right)^2
-\]
+$$
+L(\mathbf{w}, b) = \frac{1}{n}\sum_{i=1}^{n}\left(y^{(i)}-\sigma(z^{(i)})\right)^2
+$$
 
-where:
+For each input vector, Adaline calculates a continuous linear output:
 
-- \(n\) is the number of training examples.
-- \(y^{(i)}\) is the target value.
-- \(\hat{y}^{(i)}\) is the continuous linear output.
-- \(\mathbf{w}\) and \(b\) represent the weights and bias.
+$$
+\sigma(z^{(i)}) = \mathbf{w}^T\mathbf{x}^{(i)} + b
+$$
+
+Where:
+
+- $n$ = Number of training examples
+- $y^{(i)}$ = True target value for the $i$-th sample
+- $\hat{y}^{(i)}$ = Continuous linear output for the $i$-th sample
+- $\mathbf{x}^{(i)}$ = Input feature vector for the $i$-th sample
+- $\mathbf{w}$ = Weight vector
+- $b$ = Bias
 
 The weights and bias are updated using full batch gradient descent.
 
@@ -55,11 +63,11 @@ Run the Iris experiment directly from the project root:
 python examples/adaline_gd_iris.py
 ```
 
-or
+<!-- or
 
 ```bash
 python examples/adaline_sgd_iris.py
-```
+``` -->
 
 The example trains Adaline models using different learning rates, displays their loss curves, and visualizes the learned decision regions.
 
