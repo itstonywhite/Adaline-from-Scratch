@@ -1,5 +1,6 @@
 import numpy as np
 
+# Full Batch Gradient Descent Adaline API
 class AdalineGD:
     """
     ADAptive LInear NEuron classifier.

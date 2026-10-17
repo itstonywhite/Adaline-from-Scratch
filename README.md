@@ -40,37 +40,6 @@ Where:
 
 The weights and bias are updated using full batch gradient descent.
 
-### 📥 Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/itstonywhite/Adaline-from-Scratch.git
-cd Adaline-from-Scratch
-```
-
-2. Install the required dependencies:
-
-```bash
-pip install numpy pandas matplotlib
-```
-
-### Run the Example
-
-Run the Iris experiment directly from the project root:
-
-```bash
-python examples/adaline_gd_iris.py
-```
-
-<!-- or
-
-```bash
-python examples/adaline_sgd_iris.py
-``` -->
-
-The example trains Adaline models using different learning rates, displays their loss curves, and visualizes the learned decision regions.
-
 ## 📊 Results and Visualizations
 
 ### 1. Learning Rate Comparison
@@ -104,6 +73,37 @@ The `AdalineGD` class provides the following methods:
 
 The implementation uses NumPy for vectorized mathematical operations and Matplotlib for visualization. Pandas is used to load and process the Iris dataset.
 
+## 📥 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/itstonywhite/Adaline-from-Scratch.git
+cd Adaline-from-Scratch
+```
+
+2. Install the required dependencies:
+
+```bash
+pip install numpy pandas matplotlib
+```
+
+### Run the Example
+
+Run the Iris experiment directly from the project root:
+
+```bash
+python examples/adaline_gd_iris.py
+```
+
+<!-- or
+
+```bash
+python examples/adaline_sgd_iris.py
+``` -->
+
+The example trains Adaline models using different learning rates, displays their loss curves, and visualizes the learned decision regions.
+
 ## 📂 Repository Structure
 
 ```text
@@ -131,7 +131,9 @@ The implementation uses NumPy for vectorized mathematical operations and Matplot
 └── README.md
 ```
 
-## 👨‍💻 Author
+---
+
+### 👨‍💻 Author
 
 **Tony White**
 
