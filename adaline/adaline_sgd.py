@@ -49,9 +49,11 @@ class AdalineSGD:
         Returns:
             self : object.
         """
-        self._initialize_weights(X.shape)
-        self.losses_ = []
-        
+        X = np.asarray(X, dtype=float)
+        y = np.asarray(y, dtype=float)
+
+        self._initialize_weights(X.shape[1])
+        self.losses_ = []        
         for i in range(self.n_iter):
             if self.shuffle:
                 X, y = self._shuffle(X, y)
@@ -66,7 +68,7 @@ class AdalineSGD:
         """Fit training data without reinitializing the weights"""
         if not self.w_initialized:
             self._initialize_weights(X.shape[1])
-        if y.revel().shape[0] > 1:
+        if y.ravel().shape[0] > 1:
             for xi, target in zip(X, y):
                 self._update_weights(xi, target)
         else:
