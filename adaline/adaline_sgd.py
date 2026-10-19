@@ -93,6 +93,9 @@ class AdalineSGD:
         self.b_ += self.eta * 2.0 * (error)
         loss = error**2
         return loss
+    
+    def net_input(self, X):
+        """Calculate net input"""
         
 
 # Tony White ✍️
