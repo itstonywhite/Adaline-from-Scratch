@@ -19,7 +19,15 @@ from utils.plotting import plot_decision_regions
 
 
 def main():
-    pass
+
+    # Locate project root and load dataset
+    data_path = PROJECT_ROOT / "data" / "iris.txt"
+
+    df = pd.read_csv(
+        data_path,
+        header=None,
+        encoding="utf-8"
+    )
 
 
 if __name__ == "__main__":
