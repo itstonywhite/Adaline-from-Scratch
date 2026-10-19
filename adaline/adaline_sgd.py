@@ -26,5 +26,13 @@ class AdalineSGD:
             Mean squared error loss function value averaged over
             all training examples in each epoch.
     """
+    
+    def __init__(self, eta=0.01, n_iter=10,
+                 shuffle=True, random_state=None):
+        self.eta = eta
+        self.n_iter = n_iter
+        self.w_initialized = False
+        self.shuffle = shuffle
+        self.random_state = random_state
 
 # Tony White ✍️
