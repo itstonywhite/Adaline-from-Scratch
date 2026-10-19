@@ -96,6 +96,6 @@ class AdalineSGD:
     
     def net_input(self, X):
         """Calculate net input"""
-        
+        return np.dot(X, self.w_) + self.b_
 
 # Tony White ✍️
