@@ -101,5 +101,8 @@ class AdalineSGD:
     def activation(self, X):
         """Compute linear activation"""
         return X
+    
+    def predict(self, X):
+        """Return class label after unit step"""
 
 # Tony White ✍️
