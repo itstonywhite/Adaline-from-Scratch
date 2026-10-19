@@ -77,7 +77,9 @@ class AdalineSGD:
         """Shuffle training data"""
         r = self.rgn.permutation(len(y))
         return X[r], y[r]
-        
+    
+    def _initialize_weights(self, m):
+        """Initialize weights to small random numbers"""
         
 
 # Tony White ✍️
