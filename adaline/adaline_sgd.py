@@ -49,7 +49,6 @@ class AdalineSGD:
         Returns:
             self : object.
         """
-        
         self._initialize_weights(X.shape)
         self.losses_ = []
         
@@ -61,12 +60,10 @@ class AdalineSGD:
                 losses.append(self._update_weights(xi, target))
             avg_loss = np.mean(losses)
             self.losses_.append(avg_loss)
-
         return self
     
     def partial_fit(self, X, y):
         """Fit training data without reinitializing the weights"""
-        
         if not self.w_initialized:
             self._initialize_weights(X.shape[1])
         if y.revel().shape[0] > 1:
@@ -74,11 +71,12 @@ class AdalineSGD:
                 self._update_weights(xi, target)
         else:
             self._update_weights(X, y)
-            
         return self
     
     def _shuffle(self, X, y):
         """Shuffle training data"""
+        r = self.rgn.permutation(len(y))
+        return X[r], y[r]
         
         
 
