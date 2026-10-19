@@ -36,6 +36,17 @@ def main():
     # Extract sepal length and petal length
     X = df.iloc[0:100, [0, 2]].values
 
+    # Standardization
+    X_std = np.copy(X)
+
+    X_std[:, 0] = (
+        X[:, 0] - X[:, 0].mean()
+    ) / X[:, 0].std()
+
+    X_std[:, 1] = (
+        X[:, 1] - X[:, 1].mean()
+    ) / X[:, 1].std()
+
 
 if __name__ == "__main__":
     main()
