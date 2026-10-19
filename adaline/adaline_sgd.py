@@ -76,6 +76,10 @@ class AdalineSGD:
             self._update_weights(X, y)
             
         return self
+    
+    def _shuffle(self, X, y):
+        """Shuffle training data"""
+        
         
 
 # Tony White ✍️
