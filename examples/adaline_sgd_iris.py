@@ -47,6 +47,15 @@ def main():
         X[:, 1] - X[:, 1].mean()
     ) / X[:, 1].std()
 
+    # Train Adaline on standardized data
+    ada_sgd = AdalineSGD(
+        n_iter=15,
+        eta=0.01,
+        random_state=1
+    )
+
+    ada_sgd.fit(X_std, y)
+
 
 if __name__ == "__main__":
     main()
