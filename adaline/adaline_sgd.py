@@ -87,6 +87,12 @@ class AdalineSGD:
         
     def _update_weights(self, xi, target):
         """Apply Adaline learning rule to update the weights"""
+        output = self.activation(self.net_input(xi))
+        error = (target - output)
+        self.w_ += self.eta * 2.0 * xi * (error)
+        self.b_ += self.eta * 2.0 * (error)
+        loss = error**2
+        return loss
         
 
 # Tony White ✍️
