@@ -50,5 +50,19 @@ class AdalineSGD:
             self : object.
         """
         
+        self._initialize_weights(X.shape)
+        self.losses_ = []
+        
+        for i in range(self.n_iter):
+            if self.shuffle:
+                X, y = self._shuffle(X, y)
+            losses = []
+            for xi, target in zip(X, y):
+                losses.append(self._update_weights(xi, target))
+            avg_loss = np.mean(losses)
+            self.losses_.append(avg_loss)
+
+        return self
+        
 
 # Tony White ✍️
