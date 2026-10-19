@@ -56,6 +56,20 @@ def main():
 
     ada_sgd.fit(X_std, y)
 
+    # Decision regions
+    plot_decision_regions(
+        X_std,
+        y,
+        classifier=ada_sgd
+    )
+
+    plt.title("Adaline - Stochastic Gradient Descent")
+    plt.xlabel("Sepal Length [standardized]")
+    plt.ylabel("Petal Length [standardized]")
+    plt.legend(loc="upper left")
+    plt.tight_layout()
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
