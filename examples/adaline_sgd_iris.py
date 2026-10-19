@@ -56,7 +56,7 @@ def main():
 
     ada_sgd.fit(X_std, y)
 
-    # Decision regions
+    # Decision regions plot
     plot_decision_regions(
         X_std,
         y,
@@ -67,6 +67,18 @@ def main():
     plt.xlabel("Sepal Length [standardized]")
     plt.ylabel("Petal Length [standardized]")
     plt.legend(loc="upper left")
+    plt.tight_layout()
+    plt.show()
+
+    # Average loss plot
+    plt.plot(
+        range(1, len(ada_sgd.losses_) + 1),
+        ada_sgd.losses_,
+        marker="o"
+    )
+
+    plt.xlabel("Epochs")
+    plt.ylabel("Average loss")
     plt.tight_layout()
     plt.show()
 
