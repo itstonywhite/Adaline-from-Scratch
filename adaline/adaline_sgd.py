@@ -63,6 +63,9 @@ class AdalineSGD:
             self.losses_.append(avg_loss)
 
         return self
+    
+    def partial_fit(self, X, y):
+        """Fit training data without reinitializing the weights"""
         
 
 # Tony White ✍️
