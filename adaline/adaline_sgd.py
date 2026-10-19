@@ -67,5 +67,15 @@ class AdalineSGD:
     def partial_fit(self, X, y):
         """Fit training data without reinitializing the weights"""
         
+        if not self.w_initialized:
+            self._initialize_weights(X.shape[1])
+        if y.revel().shape[0] > 1:
+            for xi, target in zip(X, y):
+                self._update_weights(xi, target)
+        else:
+            self._update_weights(X, y)
+            
+        return self
+        
 
 # Tony White ✍️
