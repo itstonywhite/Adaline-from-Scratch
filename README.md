@@ -11,42 +11,78 @@ The project uses an object-oriented design and the Iris dataset to demonstrate h
 
 ## 📚 About Adaline
 
-Adaline is a linear classifier that learns by minimizing a cost function using gradient descent.
+**ADAptive LInear NEuron (Adaline)** is a linear classifier that learns by minimizing a cost function using gradient descent.
 
-Unlike the Perceptron, which updates its weights based on classification errors, Adaline uses the continuous output of its linear activation function to calculate the error during training.
+Unlike the Perceptron, which updates its weights based on classification errors, Adaline calculates errors using its continuous linear output.
+
+### Linear Activation Function
+
+For each input vector, Adaline calculates the net input and applies a linear (identity) activation function:
+
+$$
+z^{(i)} = \mathbf{w}^T\mathbf{x}^{(i)} + b
+$$
+
+$$
+\sigma(z^{(i)}) = z^{(i)}
+$$
+
+Since the activation function is linear, its output is equal to the net input.
 
 ### Cost Function
 
-The model minimizes the Mean Squared Error (MSE):
+Adaline minimizes the Mean Squared Error (MSE):
 
 $$
 L(\mathbf{w}, b) = \frac{1}{n}\sum_{i=1}^{n}\left(y^{(i)}-\sigma(z^{(i)})\right)^2
 $$
 
-For each input vector, Adaline calculates a continuous linear output:
+### Parameter Updates
+
+The weights and bias are updated in the direction that reduces the cost function, using a learning rate ($\eta$).
+
+**Full Batch Gradient Descent (GD):**
 
 $$
-\sigma(z^{(i)}) = \mathbf{w}^T\mathbf{x}^{(i)} + b
+\mathbf{w} \leftarrow \mathbf{w} + \frac{2\eta}{n}\sum_{i=1}^{n}\left(y^{(i)}-\sigma(z^{(i)})\right)\mathbf{x}^{(i)}
 $$
+
+$$
+b \leftarrow b + \frac{2\eta}{n}\sum_{i=1}^{n}\left(y^{(i)}-\sigma(z^{(i)})\right)
+$$
+
+Full Batch GD calculates the gradients using the entire training dataset and updates the parameters once per epoch.
+
+**Stochastic Gradient Descent (SGD):**
+
+$$
+\mathbf{w} \leftarrow \mathbf{w} + 2\eta\left(y^{(i)}-\sigma(z^{(i)})\right)\mathbf{x}^{(i)}
+$$
+
+$$
+b \leftarrow b + 2\eta\left(y^{(i)}-\sigma(z^{(i)})\right)
+$$
+
+SGD updates the weights and bias after each individual training sample rather than waiting to process the entire dataset.
 
 Where:
 
-- $n$ = Number of training examples
-- $y^{(i)}$ = True target value for the $i$-th sample
-- $\hat{y}^{(i)}$ = Continuous linear output for the $i$-th sample
-- $\mathbf{x}^{(i)}$ = Input feature vector for the $i$-th sample
-- $\mathbf{w}$ = Weight vector
-- $b$ = Bias
-
-The weights and bias are updated using full batch gradient descent.
+- $n$ = Number of training examples.
+- $y^{(i)}$ = True target value for the $i$-th sample.
+- $z^{(i)}$ = Net input for the $i$-th sample.
+- $\sigma(z^{(i)})$ = Continuous linear output for the $i$-th sample.
+- $\mathbf{x}^{(i)}$ = Input feature vector.
+- $\mathbf{w}$ = Weight vector.
+- $b$ = Bias.
+- $\eta$ = Learning rate.
 
 ## 📊 Results and Visualizations
 
-### 1. Learning Rate Comparison
+### 1. Learning Rate Comparison (Full Batch GD)
 
 Compare the training loss using different learning rates on the original, non-standardized Iris features.
 
-![Adaline learning rate comparison](./plots/loss%20vs%20epochs%20plot.png)
+![Adaline learning rate comparison (full batch gd)](./plots/loss%20vs%20epochs%20plot.png)
 
 ### 2. Decision Regions
 
@@ -60,18 +96,31 @@ Observe how the model's Mean Squared Error changes as full batch gradient descen
 
 ![Adaline MSE by epoch](./plots/MSE%20by%20number%20of%20epochs%20plot.png)
 
+### 4. Average Loss per Epoch in SGD
+
+Observe the average loss recorded across individual sample updates during each epoch of stochastic gradient descent.
+
+![Adaline Average loss by Epoch](./plots/Average%20loss%20plot.png)
+
 ## 🛠️ Implementation Details
 
-The `AdalineGD` class provides the following methods:
+The project provides two Adaline implementations:
+
+| Class        | Description                               |
+| ------------ | ----------------------------------------- |
+| `AdalineGD`  | Trains using Full Batch Gradient Descent. |
+| `AdalineSGD` | Trains using Stochastic Gradient Descent. |
+
+Both implementations provide the following methods:
 
 | Method          | Description                                            |
 | --------------- | ------------------------------------------------------ |
-| `fit(X, y)`     | Trains the model using full batch gradient descent.    |
+| `fit(X, y)`     | Trains the model.                                      |
 | `net_input(X)`  | Calculates the weighted sum plus bias.                 |
-| `activation(X)` | Returns the linear activation.                         |
+| `activation(X)` | Computes the linear activation.                        |
 | `predict(X)`    | Predicts binary class labels using a threshold of 0.5. |
 
-The implementation uses NumPy for vectorized mathematical operations and Matplotlib for visualization. Pandas is used to load and process the Iris dataset.
+`AdalineSGD` also provides `partial_fit(X, y)` for incremental training without reinitializing the model parameters (Online Learning).
 
 ## 📥 Installation
 
@@ -96,13 +145,13 @@ Run the Iris experiment directly from the project root:
 python examples/adaline_gd_iris.py
 ```
 
-<!-- or
+or
 
 ```bash
 python examples/adaline_sgd_iris.py
-``` -->
+```
 
-The example trains Adaline models using different learning rates, displays their loss curves, and visualizes the learned decision regions.
+The examples train Adaline models, display their loss curves, and visualize the learned decision regions.
 
 ## 📂 Repository Structure
 
@@ -110,25 +159,28 @@ The example trains Adaline models using different learning rates, displays their
 .
 ├── adaline/
 │   ├── __init__.py
-│   ├── adaline_gd.py       # Full Batch Gradient Descent
-│   └── adaline_sgd.py      # Stochastic Gradient Descent (in development)
+│   ├── adaline_gd.py        # Full Batch Gradient Descent
+│   └── adaline_sgd.py       # Stochastic Gradient Descent
 │
 ├── data/
-│   └── iris.txt            # Iris dataset
+│   └── iris.txt             # Iris dataset
 │
 ├── examples/
-│   └── adaline_gd_iris.py  # Training and visualization example
+│   ├── adaline_gd_iris.py   # Training & visualization example (GD)
+│   └── adaline_sgd_iris.py  # Training & visualization example (SGD)
 │
 ├── plots/
 │   ├── Adaline's Decision Regions.png
 │   ├── loss vs epochs plot.png
-│   └── MSE by number of epochs plot.png
+│   ├── MSE by number of epochs plot.png
+│   └── Average loss plot.png
+│
 │
 ├── utils/
-│   └── plotting.py         # Decision-region visualization utility
+│   └── plotting.py          # Decision-region visualization utility
 │
 ├── .gitignore
-└── README.md
+└── README.md                # Document
 ```
 
 ---
