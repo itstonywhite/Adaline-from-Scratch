@@ -82,8 +82,11 @@ class AdalineSGD:
         """Initialize weights to small random numbers"""
         self.rgn = np.random.default_rng(self.random_state)
         self.w_ = self.rgn.normal(loc=0.0, scale=0.01, size=m)
-        self.b_ = np.float64(0.)        
+        self.b_ = np.float64(0.)
         self.w_initialized = True
+        
+    def _update_weights(self, xi, target):
+        """Apply Adaline learning rule to update the weights"""
         
 
 # Tony White ✍️
