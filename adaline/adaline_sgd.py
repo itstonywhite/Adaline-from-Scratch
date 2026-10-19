@@ -100,5 +100,6 @@ class AdalineSGD:
     
     def activation(self, X):
         """Compute linear activation"""
+        return X
 
 # Tony White ✍️
