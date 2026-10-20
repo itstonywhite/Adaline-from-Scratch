@@ -42,6 +42,10 @@ class AdalineGD:
         Returns
             self : object
         """
+        # Converting inputs into NumPy arrays
+        X = np.asarray(X, dtype=float)
+        y = np.asarray(y, dtype=float)
+        
         # Input validation
         if X.ndim != 2:
             raise ValueError("X must be a 2-dimensional array.")
@@ -57,10 +61,6 @@ class AdalineGD:
 
         if not np.isfinite(X).all() or not np.isfinite(y).all():
             raise ValueError("X and y must contain only finite values.")
-
-        # Converting inputs into NumPy arrays
-        X = np.asarray(X, dtype=float)
-        y = np.asarray(y, dtype=float)
 
         rgn = np.random.default_rng(self.random_state)
         self.w_ = rgn.normal(loc=0.0, scale=0.01, size=X.shape[1])
