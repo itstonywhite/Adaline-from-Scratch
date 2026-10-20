@@ -66,13 +66,18 @@ class AdalineSGD:
     
     def partial_fit(self, X, y):
         """Fit training data without reinitializing the weights"""
+        X = np.asarray(X, dtype=float)
+        y = np.asarray(y, dtype=float).ravel()
+
+        if X.ndim == 1:
+            X = X.reshape(1, -1)
+
         if not self.w_initialized:
             self._initialize_weights(X.shape[1])
-        if y.ravel().shape[0] > 1:
-            for xi, target in zip(X, y):
-                self._update_weights(xi, target)
-        else:
-            self._update_weights(X, y)
+
+        for xi, target in zip(X, y):
+            self._update_weights(xi, target)
+
         return self
     
     def _shuffle(self, X, y):
